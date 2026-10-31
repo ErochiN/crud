@@ -1,0 +1,252 @@
+@font-face 
+{
+    font-family: 'AguDisplay';
+    src: url('../fonts/AguDisplay-Regular-VariableFont_MORF.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+@font-face 
+{
+    font-family: 'ShareTechMono';
+    src: url('../fonts/ShareTechMono-Regular.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+body 
+{
+    margin: 20px 0 0 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-image: url('../img/body.png');
+    background-size: 33%;
+}
+
+a
+{
+    color: black;
+    text-decoration: none;
+}
+
+.p-content
+{
+    font-family: 'ShareTechMono', sans-serif;
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-button 
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 151px;
+    height: 40px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7A7A7A 0%,
+            #E0E0E0 15%,
+            #E0E0E0 85%,
+            #7A7A7A 100%
+        );
+
+    border: 1px solid #777;
+
+    box-shadow:
+        inset 1px 1px 1px #eee,
+        inset -1px -1px 2px #777,
+        0 2px 3px #888;
+
+    box-sizing: border-box;
+    cursor: pointer;
+
+    font-family: 'AguDisplay', sans-serif;
+
+    margin-bottom: 10px;
+}
+
+.nav-button:hover 
+{
+    background:
+        linear-gradient(
+            90deg,
+            #888 0%,
+            #c9c9c9 10%,
+            #eee 50%,
+            #c9c9c9 90%,
+            #888 100%
+        );
+}
+
+.nav-button:active 
+{
+    box-shadow:
+        inset 2px 2px 4px #777,
+        inset -1px -1px 2px #eee;
+}
+
+.banner
+{
+    margin-bottom: 10px;
+}
+
+.section-main
+{
+    display: flex;
+    
+}
+
+nav
+{
+    width: 165px;
+    height: 832px;
+    background-image: url('../img/x.png');
+    background-size: 15%;
+    margin-right: 35px;
+    border: #767676 solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 13px;
+}
+.img-nav
+{
+    background-image: url('../img/nav.png');
+    background-color: #D9D9D9;
+    background-size: cover;
+    width: 151px;
+    height: 77px;
+    border: #767676 solid;
+    margin-bottom: 5px;
+}
+.section-main__h4
+{
+    font-family: 'AguDisplay', sans-serif;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+
+.content
+{
+    width: 653px;
+    height: 832px;
+    background-color: #CBCBCB;
+    background-size: 15%;
+    margin-right: 35px;
+    border: #767676 solid;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+.content-content
+{
+    width: 633px;
+    height: 809px;
+    background-color: #D9D9D9;
+    border: #767676 solid 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 13px;
+}
+.content-content__one
+{
+    width: 607px;
+    height: 169px;
+    background-color: #CBCBCB;
+    border: #767676 solid 1px;
+    
+    box-shadow: 5px -5px 5px 0px rgba(34, 60, 80, 0.3) inset;
+    box-shadow: 0px -5px 5px 5px rgba(34, 60, 80, 0.3) inset;
+
+    display: flex;
+    margin-bottom: 10px
+}
+.content-content__one-image
+{
+    width: 225px;
+    height: 169px;
+
+    background-image: url('../img/harry.gif');
+    background-size: cover;
+}
+.content-content__one-text
+{
+    width: 382px;
+    height: 169px;
+    display: flex;
+    align-items: center;
+    padding-left: 35px;
+}
+
+.givean
+{
+    width: 260px;
+    height: 832px;
+    background-color: #CBCBCB;
+    background-size: 15%;
+    border: #767676 solid;
+}
+
+.content-content__two
+{
+    width: 607px;
+    display: flex;
+}
+.content-content__two-one
+{
+    width: 351px;
+    height: 419px;
+    background-color: #CBCBCB;
+    border: #767676 solid 1px;
+    
+    box-shadow: 5px -5px 5px 0px rgba(34, 60, 80, 0.3) inset;
+    box-shadow: 0px -5px 5px 5px rgba(34, 60, 80, 0.3) inset;
+
+    margin-right: 14px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.content-content__two-two
+{
+    width: 242px;
+    height: 419px;
+    background-color: #CBCBCB;
+    border: #767676 solid 1px;
+    
+    box-shadow: 5px -5px 5px 0px rgba(34, 60, 80, 0.3) inset;
+    box-shadow: 0px -5px 5px 5px rgba(34, 60, 80, 0.3) inset;
+
+}
+
+.content-content__two-one-image
+{
+    width: 280px;
+    height: 329px;
+
+    background-image: url('../img/тян.png');
+    background-size: cover;
+}
+.content-content__two-one-p
+{
+    width: 270px;
+}
+
+marquee
+{
+    font-family: 'ShareTechMono', sans-serif;
+}
