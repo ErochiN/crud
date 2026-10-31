@@ -1,4 +1,5 @@
-@font-face 
+/* ---------- Шрифты ---------- */
+@font-face
 {
     font-family: 'AguDisplay';
     src: url('../fonts/AguDisplay-Regular-VariableFont_MORF.ttf') format('truetype');
@@ -6,7 +7,7 @@
     font-style: normal;
 }
 
-@font-face 
+@font-face
 {
     font-family: 'ShareTechMono';
     src: url('../fonts/ShareTechMono-Regular.ttf') format('truetype');
@@ -14,7 +15,17 @@
     font-style: normal;
 }
 
-body 
+/* ---------- Переменные ---------- */
+:root
+{
+    --border-color: #767676;
+    --panel-dark: #CBCBCB;
+    --panel-light: #D9D9D9;
+    --inset-shadow: 0 -5px 5px 5px rgba(34, 60, 80, 0.3) inset;
+}
+
+/* ---------- База ---------- */
+body
 {
     margin: 20px 0 0 0;
     padding: 0;
@@ -33,6 +44,19 @@ a
     text-decoration: none;
 }
 
+input
+{
+    width: 541px;
+    height: 27px;
+    background-color: #CBCBCB;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+
+    box-shadow: 0px 5px 8px 0px rgba(34, 60, 80, 0.3) inset;
+    font-family: 'ShareTechMono', sans-serif;
+    padding-left: 5px;
+}
+
 .p-content
 {
     font-family: 'ShareTechMono', sans-serif;
@@ -41,7 +65,92 @@ a
     padding: 0;
 }
 
-.nav-button 
+marquee
+{
+    font-family: 'ShareTechMono', sans-serif;
+}
+
+.banner
+{
+    margin-bottom: 10px;
+}
+
+/* ---------- Общие блоки ---------- */
+
+/* базовый прямоугольник: фон и тонкая рамка */
+.panel
+{
+    background-color: var(--panel-dark);
+    border: 1px solid var(--border-color);
+}
+
+/* модификаторы панели */
+.panel--frame
+{
+    border-width: 3px;
+    height: 832px;
+}
+
+.panel--light
+{
+    background-color: var(--panel-light);
+}
+
+.panel--inset
+{
+    box-shadow: var(--inset-shadow);
+}
+
+/* помощники для раскладки */
+.row
+{
+    display: flex;
+}
+
+.col
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ---------- Каркас страницы ---------- */
+.section-main
+{
+    display: flex;
+}
+
+/* ---------- Левое меню ---------- */
+nav
+{
+    width: 165px;
+    margin-right: 35px;
+    padding-top: 13px;
+
+    background-image: url('../img/x.png');
+    background-size: 15%;
+}
+
+.img-nav
+{
+    width: 151px;
+    height: 77px;
+
+    background-image: url('../img/nav.png');
+    background-color: var(--panel-light);
+    background-size: cover;
+
+    border: var(--border-color) solid;
+    margin-bottom: 5px;
+}
+
+.section-main__h4
+{
+    font-family: 'AguDisplay', sans-serif;
+    margin: 0 0 5px 0;
+}
+
+.nav-button
 {
     display: flex;
     align-items: center;
@@ -74,7 +183,7 @@ a
     margin-bottom: 10px;
 }
 
-.nav-button:hover 
+.nav-button:hover
 {
     background:
         linear-gradient(
@@ -87,91 +196,48 @@ a
         );
 }
 
-.nav-button:active 
+.nav-button:active
 {
     box-shadow:
         inset 2px 2px 4px #777,
         inset -1px -1px 2px #eee;
 }
 
-.banner
-{
-    margin-bottom: 10px;
-}
-
-.section-main
-{
-    display: flex;
-    
-}
-
-nav
-{
-    width: 165px;
-    height: 832px;
-    background-image: url('../img/x.png');
-    background-size: 15%;
-    margin-right: 35px;
-    border: #767676 solid;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 13px;
-}
-.img-nav
-{
-    background-image: url('../img/nav.png');
-    background-color: #D9D9D9;
-    background-size: cover;
-    width: 151px;
-    height: 77px;
-    border: #767676 solid;
-    margin-bottom: 5px;
-}
-.section-main__h4
-{
-    font-family: 'AguDisplay', sans-serif;
-    margin: 0;
-    margin-bottom: 5px;
-}
-
-
+/* ---------- Центральная колонка ---------- */
 .content
 {
     width: 653px;
-    height: 832px;
-    background-color: #CBCBCB;
-    background-size: 15%;
     margin-right: 35px;
-    border: #767676 solid;
+    padding-top: 10px;
+
     display: flex;
     justify-content: center;
-    padding-top: 10px;
 }
+
 .content-content
 {
     width: 633px;
     height: 809px;
-    background-color: #D9D9D9;
-    border: #767676 solid 1px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding-top: 13px;
 }
+
 .content-content__one
 {
     width: 607px;
     height: 169px;
-    background-color: #CBCBCB;
-    border: #767676 solid 1px;
-    
-    box-shadow: 5px -5px 5px 0px rgba(34, 60, 80, 0.3) inset;
-    box-shadow: 0px -5px 5px 5px rgba(34, 60, 80, 0.3) inset;
+    margin-bottom: 10px;
+}
+
+.content-content__one-text
+{
+    width: 382px;
+    height: 169px;
+    padding-left: 35px;
 
     display: flex;
-    margin-bottom: 10px
+    align-items: center;
 }
+
 .content-content__one-image
 {
     width: 225px;
@@ -180,44 +246,18 @@ nav
     background-image: url('../img/harry.gif');
     background-size: cover;
 }
-.content-content__one-text
-{
-    width: 382px;
-    height: 169px;
-    display: flex;
-    align-items: center;
-    padding-left: 35px;
-}
-
-.givean
-{
-    width: 260px;
-    height: 832px;
-    background-color: #CBCBCB;
-    background-size: 15%;
-    border: #767676 solid;
-}
 
 .content-content__two
 {
     width: 607px;
-    display: flex;
 }
+
 .content-content__two-one
 {
     width: 351px;
     height: 419px;
-    background-color: #CBCBCB;
-    border: #767676 solid 1px;
-    
-    box-shadow: 5px -5px 5px 0px rgba(34, 60, 80, 0.3) inset;
-    box-shadow: 0px -5px 5px 5px rgba(34, 60, 80, 0.3) inset;
-
     margin-right: 14px;
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
     justify-content: space-evenly;
 }
 
@@ -225,12 +265,11 @@ nav
 {
     width: 242px;
     height: 419px;
-    background-color: #CBCBCB;
-    border: #767676 solid 1px;
-    
-    box-shadow: 5px -5px 5px 0px rgba(34, 60, 80, 0.3) inset;
-    box-shadow: 0px -5px 5px 5px rgba(34, 60, 80, 0.3) inset;
+}
 
+.content-content__two-one-p
+{
+    width: 270px;
 }
 
 .content-content__two-one-image
@@ -241,12 +280,104 @@ nav
     background-image: url('../img/тян.png');
     background-size: cover;
 }
-.content-content__two-one-p
+
+/* ---------- Правая колонка ---------- */
+.givean
 {
-    width: 270px;
+    width: 260px;
 }
 
-marquee
+.dop
 {
-    font-family: 'ShareTechMono', sans-serif;
+    background-color: #eee;
+}
+
+.img-reg
+{
+    width: 607px;
+    height: 150px;
+    background-image: url('/img/miku-hatsune-miku.gif');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 10px;
+}
+
+/* ---------- CRT-эффект ---------- */
+.crt
+{
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;   /* клики проходят сквозь слой */
+
+    /* виньетка: затемнение по краям экрана */
+    background: radial-gradient(ellipse at center,
+                                transparent 60%,
+                                rgba(0, 0, 0, 0.35) 100%);
+}
+
+body.crt-on .crt
+{
+    display: block;
+}
+
+/* полосы развёртки + мерцание */
+.crt::before
+{
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px;
+
+    animation: crt-flicker 0.15s infinite alternate;
+}
+
+/* бегущая светлая полоса */
+.crt::after
+{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -120px;
+    width: 100%;
+    height: 120px;
+
+    background: linear-gradient(to bottom,
+                                transparent,
+                                rgba(255, 255, 255, 0.06),
+                                transparent);
+
+    animation: crt-roll 7s linear infinite;
+}
+
+@keyframes crt-flicker
+{
+    from { opacity: 0.85; }
+    to   { opacity: 1; }
+}
+
+@keyframes crt-roll
+{
+    to { transform: translateY(calc(100vh + 120px)); }
+}
+
+/* лёгкое расслоение цветов на тексте, как на старых мониторах */
+body.crt-on
+{
+    text-shadow: 0.6px 0 rgba(255, 0, 0, 0.35),
+                -0.6px 0 rgba(0, 120, 255, 0.35);
+}
+
+/* уважаем настройку «уменьшить движение» */
+@media (prefers-reduced-motion: reduce)
+{
+    .crt::before,
+    .crt::after
+    {
+        animation: none;
+    }
 }

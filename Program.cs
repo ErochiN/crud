@@ -3,6 +3,7 @@ namespace CRDUProject
     public class Program
     {
         private static string _index = "index.html";
+        private static string _registorPage = "pages/register.html";
 
         public static void Main(string[] args)
         {
@@ -11,42 +12,17 @@ namespace CRDUProject
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            var resistrationGroup = app.MapGroup("/register");
+            resistrationGroup.MapGet("/", async (HttpContext context) => 
+            {
+                await SendHtmlAsSync(context, _registorPage);
+            });
+
             app.Run();
-
-            //app.MapGet("/", async (HttpContext context) => 
-            //{
-            //    Console.WriteLine(context.Request.Path);
-            //    await SendHtmlAsync(context, _index);
-            //});
-
-            //app.MapGet("/css/{fileName}", async (HttpContext context, string fileName) => 
-            //{ 
-            //    Console.WriteLine(context.Request.Path);
-            //    await SendCssAsync(context, fileName);
-            //});
-
-            //app.MapGet("/img/{fileName}", async (HttpContext context, string fileName) =>
-            //{
-            //    Console.WriteLine(context.Request.Path);
-            //    await SendImgAsync(context, fileName);
-            //});
-
-            //app.MapGet("/fonts/{fileName}", async (HttpContext context, string fileName) =>
-            //{
-            //    Console.WriteLine(context.Request.Path);
-            //    await SendFontAsync(context, fileName);
-            //});
-
-            //app.MapGet("/icons/{fileName}", async (HttpContext context, string fileName) =>
-            //{
-            //    Console.WriteLine(context.Request.Path);
-            //    await SendIconsAsync(context, fileName);
-            //});
-
-            //app.Run();
         }
 
-        private static async Task SendHtmlAsync(HttpContext context, string pathPage)
+        private static async Task SendHtmlAsSync(HttpContext context, string pathPage)
         {
             context.Response.ContentType = "text/html";
             await context.Response.SendFileAsync("wwwroot/" + pathPage); 
