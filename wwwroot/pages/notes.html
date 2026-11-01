@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Welcome My CRDU</title>
+
+    <link rel="icon" href="/icons/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="manifest" href="/icons/site.webmanifest">
+</head>
+<body>
+    <div class="crt"></div>
+    <div class="banner">
+        <img src="/img/banner 1.png" alt="Banner Image">
+    </div>
+
+    <section class="section-main">
+        <nav class="panel panel--frame col">
+            <div class="img-nav"></div>
+            <h4 class="section-main__h4">MAIN</h4>
+            <a href="/" class="nav-button">Home</a>
+            <button id="crt-toggle" class="nav-button" type="button">CRT filter on/off</button>
+        </nav>
+
+        <div class="content panel panel--frame">
+            <div class="content-content panel panel--light col">
+
+                <div class="img-reg img-rer"></div>
+
+                <div class="col">
+
+                    <form id="noteForm" class="col" action="/notes" method="post">
+                        <textarea class="noteinput" name="note" placeholder="note">{{note}}</textarea>
+                        <input type="text" name="name" placeholder="name">
+                    </form>
+
+                    <div class="row button-div">
+                        <button form="noteForm" type="submit" name="operation" value="Created"  class="nav-button">Create</button>
+                        <button form="noteForm" type="submit" name="operation" value="Read"     class="nav-button">Read</button>
+                        <button form="noteForm" type="submit" name="operation" value="Updated"  class="nav-button">Update</button>
+                        <button form="noteForm" type="submit" name="operation" value="Deleted"  class="nav-button">Delete</button>
+                    </div>
+                </div>
+
+                <marquee direction="left" scrollamount="10">
+                    Sowwwy sowwy sowwy sowwy, it's just... uhhhhhh..... the database isn't hooked up yet, I'm just reaaaally tired for today, and I wanna grab some food and flop on the couch for a bitttt :3 
+                </marquee>
+
+            </div>
+        </div>
+
+        <div class="givean panel panel--frame"></div>
+    </section>
+</body>
+
+<script>
+    const body = document.body;
+    const button = document.getElementById("crt-toggle");
+
+    // по умолчанию включено; запоминаем выбор между страницами
+    let enabled = true;
+    try { enabled = localStorage.getItem("crt") !== "off"; } catch { }
+
+    body.classList.toggle("crt-on", enabled);
+
+    button.addEventListener("click", () =>
+    {
+        enabled = !enabled;
+        body.classList.toggle("crt-on", enabled);
+        try { localStorage.setItem("crt", enabled ? "on" : "off"); } catch { }
+    });
+</script>
+
+</html>

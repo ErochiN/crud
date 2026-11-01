@@ -57,6 +57,19 @@ input
     padding-left: 5px;
 }
 
+textarea
+{
+    width: 541px;
+    height: 27px;
+    background-color: #CBCBCB;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+
+    box-shadow: 0px 5px 8px 0px rgba(34, 60, 80, 0.3) inset;
+    font-family: 'ShareTechMono', sans-serif;
+    padding-left: 5px;
+}
+
 .p-content
 {
     font-family: 'ShareTechMono', sans-serif;
@@ -281,6 +294,12 @@ nav
     background-size: cover;
 }
 
+.noteinput
+{
+    height: 300px;
+    
+}
+
 /* ---------- Правая колонка ---------- */
 .givean
 {
@@ -301,6 +320,14 @@ nav
     background-repeat: no-repeat;
     background-position: center;
     margin: 10px;
+}
+.log-reg
+{
+    background-image: url('/img/mayura-digital-witch-mayura.gif');
+}
+.img-rer 
+{
+    background-image: url('/img/blingee-webcore.gif');
 }
 
 /* ---------- CRT-эффект ---------- */
@@ -380,4 +407,9 @@ body.crt-on
     {
         animation: none;
     }
+}
+
+.button-div
+{
+    width: 550px;
 }
