@@ -8,7 +8,7 @@ namespace CRDUProject
         {
             using (DBContext dbContext = new DBContext())
             {
-                if (await dbContext.Notes.AnyAsync(u => u.Name == nameNotes))
+                if (await dbContext.Notes.AnyAsync(u => u.User_Id == userid && u.Name == nameNotes))
                     return;
 
                 var elementNote = new Notes

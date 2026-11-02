@@ -15,9 +15,13 @@ namespace CRDUProject
         private static string _loginPage = "pages/login.html";
         private static string _notesPage = "pages/notes.html";
         private static string _homePage = "pages/home.html";
+        private static string _profilePage = "pages/profile.html";
 
         public static void Main(string[] args)
         {
+            AuthOptions.GetKey();
+
+
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddAuthorization();
@@ -62,8 +66,23 @@ namespace CRDUProject
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             using (var db = new DBContext())
-                db.Database.EnsureCreated();
+                db.Database.Migrate();
+
+            var profileGroup = app.MapGroup("/profile");
+            profileGroup.MapGet("/", [Authorize] async (HttpContext context) => 
+            {
+                string name = context.User.FindFirstValue(ClaimTypes.Name) ?? "";
+                string email = context.User.FindFirstValue(ClaimTypes.Email) ?? "";
+
+                string html = await File.ReadAllTextAsync("wwwroot/pages/profile.html");
+                html = html.Replace("{{name}}", WebUtility.HtmlEncode(name))
+                           .Replace("{{email}}", WebUtility.HtmlEncode(email));
+                return Results.Content(html, "text/html; charset=utf-8");
+            });
 
             //--------------------------------------------------------------------------
             var homeGroup = app.MapGroup("/home");
@@ -111,16 +130,14 @@ namespace CRDUProject
             {
                 await SendHtmlAsSync(context, _loginPage);
             });
-
-            var loginApiGroup = app.MapGroup("/login-api");
-            loginApiGroup.MapPost("/", async (HttpContext context, IUserManager userManager) =>
+            loginGroup.MapPost("/", async (HttpContext context, IUserManager userManager) =>
             {
                 string Email = context.Request.Form["Email"];
                 string Password = context.Request.Form["Password"];
 
                 if (!await userManager.IniUser(Email, Password))
                 {
-                    context.Response.Redirect("/auth/login?error=invalid_credentials");
+                    context.Response.Redirect("/login?error=invalid_credentials");
                     return;
                 }
 
@@ -137,7 +154,7 @@ namespace CRDUProject
                         //Secure = !app.Environment.IsDevelopment(), //https
                         Secure = context.Request.IsHttps,
                         SameSite = SameSiteMode.Lax,
-                        Expires = DateTimeOffset.UtcNow.AddDays(2),
+                        Expires = DateTimeOffset.UtcNow.AddMinutes(AuthOptions.LIFETIME),
                         Path = "/"
                     }
                 );
@@ -150,9 +167,16 @@ namespace CRDUProject
             {
                 await SendHtmlAsSync(context, _registorPage);
             });
+            resistrationGroup.MapPost("/", async (HttpContext context, IUserManager userManager) => 
+            {
+                var result = await userManager.AddUser(context);
 
-            var registerApiGroup = app.MapGroup("/register-api");
-            registerApiGroup.MapPost("/", async (HttpContext context, IUserManager userManager) => await userManager.AddUser(context));
+                if (result is IStatusCodeHttpResult status && status.StatusCode == StatusCodes.Status200OK)
+                    return Results.Redirect("/login");
+
+                return result;
+
+            });
 
             app.MapGet("/", async (HttpContext context) =>
             {
@@ -187,7 +211,7 @@ namespace CRDUProject
                 issuer: AuthOptions.ISSUER,
                 audience: AuthOptions.AUDIENCE,
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(2),
+                expires: DateTime.UtcNow.AddMinutes(AuthOptions.LIFETIME),
                 signingCredentials: credentials
             );
 

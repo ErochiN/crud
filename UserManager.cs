@@ -8,6 +8,8 @@ namespace CRDUProject
 {
     internal class UserManager : IUserManager
     {
+        private const int minimalSizePassword = 6;
+
         public async Task<IResult> AddUser(HttpContext context)
         {
             string name = context.Request.Form["Name"];
@@ -16,16 +18,18 @@ namespace CRDUProject
             string confirmPassword = context.Request.Form["confirmPassword"];
 
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
-                return Results.BadRequest(new { error = "Заполните все поля" });
+                return Results.Redirect("/register?error=empty");
             if (password != confirmPassword)
-                return Results.BadRequest(new { error = "Пароли не совпадают" });
+                return Results.Redirect("/register?error=password_mismatch");
+            if (password.Length < minimalSizePassword)
+                return Results.Redirect("/register?error=invalid_password");
+            if (!email.Contains('@'))
+                return Results.Redirect("/register?error=invalid_email");
 
             using (var dbContext = new DBContext())
             {
-                if (dbContext.Users.Any(u => u.Email == email))
-                    return Results.Conflict(new { error = "Пользователь с таким email уже есть" });
-
-
+                if (await dbContext.Users.AnyAsync(u => u.Email == email))
+                    return Results.Redirect("/register?error=email_exists");
 
                 var user = new Users
                 {
@@ -51,7 +55,6 @@ namespace CRDUProject
 
                 return BCrypt.Net.BCrypt.Verify(password, user.Password);
             }
-            ;
         }
 
         public async Task<int> GetUserId(string email)
